@@ -1,0 +1,29 @@
+<script>
+var size = 8;
+var size = Number (prompt("Enter size of chessboard"));
+var str = ""
+for (var j=0; j<size; j++) {
+  switch (j%2){
+    case 0: for (var i = 0; i<size; i++) { 
+	switch (i%2) {
+      case 0: (str+=" "); break
+      case 1:(str+="#"); break 
+      default: alert ("о-оу")
+	  };}; break
+  
+  
+    case 1: for (var i = 0; i<size; i++) {  
+	switch (i%2) {
+      case 0: (str+="#"); break
+      case 1:(str+=" "); break 
+      default: alert ("о-оу")
+	  };}; break;
+    default: console.log ("bla-bla"); break;}
+  
+str+="\n";
+}
+console.log (str)
+
+</script>
+
+
