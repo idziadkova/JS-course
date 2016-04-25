@@ -1,15 +1,5 @@
 <script>
 
-function countBs(mystring) {
-var count=0;
-for ( var i=0; i<mystring.length; i++)
-  {
-    (mystring.charAt(i)=='B'? count++: count*=1)
- }
-     return count;
-}
-
-
 function countChar(mystring, mychar) {
 var count=0;
 for ( var i=0; i<mystring.length; i++)
@@ -18,6 +8,10 @@ for ( var i=0; i<mystring.length; i++)
  }
      return count;
 };
+
+function countBs(mystring){
+return countChar (mystring, "B");
+}
 
 console.log(countBs("BBC")); 
 console.log(countChar("kakkerlak", "k"));
