@@ -1,0 +1,41 @@
+<script>
+
+var obj = {here: {is: "an"}, object: 2}; 
+
+function deepEqual(obj1,obj2){
+  var count1 = 0; 
+  var count2 = 0;
+  if (obj1==null || obj2== null) return false;
+  if (typeof obj1 != "object"|| typeof obj2 != "object") return (obj1===obj2?true:false);
+  
+
+  for (var prop1 in obj1) {
+    count1++;
+    
+    switch(typeof obj1[prop1]) {
+      
+      case "object": { if (typeof obj2[prop1]!= "object") return false; 
+                      else                  
+                        {    if (deepEqual(obj1[prop1],obj2[prop1])== false) return false};
+                      break}
+ 
+      
+      default: { if (obj1[prop1]!=obj2[prop1]) return false };
+                                }
+                             
+  }
+  
+  
+  for (var prop2 in obj2) {count2++;}
+  if (count1!=count2) return false;
+  return true; }
+    
+ 
+ 
+console.log(deepEqual(obj, obj)); // → true 
+console.log(deepEqual(obj, {here: 1, object: 2})); // → false 
+console.log(deepEqual(obj, {here: {is: "an"}, object: 2})); // → true
+
+</script>
+
+
