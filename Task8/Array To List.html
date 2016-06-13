@@ -12,11 +12,11 @@ function arrayToList(ar) {
   return li;
 };
 
-var ar1 = [];
 function listToArray (list) {
-  for (prop in list) {if (prop=="value") {ar1.push(list[prop]); }
-                      else if (list[prop]!==null) return listToArray(list[prop])}
-
+var ar1 = [];
+  while (list)  {ar1.push(list.value);
+                  list = list.rest;}
+  
 return ar1};
 
 
