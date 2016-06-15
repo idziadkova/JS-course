@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="libs.js"></script>
+ 
+</head>
+<body>
+
+  <script>
+
+function range(start, end, step) {
+  var s=(step||1);
+  s=Math.abs(s);
+  var ar = [];
+  var ind= true;
+  if (start>end) {var g=start;
+                 start=end;
+                 end=g;
+                 ind = false;}
+  for (var i = start; i<=end; i+=s) {(ind?ar.push(i):ar.unshift(i));}
+  return ar;
+   
+  }
+
+
+
+  function sum(array) {
+    res = 0;
+    for (var i =0; i<array.length; i++) {res+=array[i];}
+    return res;
+    
+  }
+
+  </script>
+
+   <script src="test.js"></script>
+</body>
+</html>
