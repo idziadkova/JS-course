@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="libs.js"></script>
+  <script src="ancestry.js"></script>
+</head>
+<body>
+
+  <script>
+
+var ancestry = JSON.parse(ANCESTRY_FILE);
+
+function average(array) {
+  function plus(a, b) { return a + b; }
+  return array.reduce(plus) / array.length;
+}
+
+
+var byName = {};
+ancestry.forEach(function(person) {
+ byName[person.name] = person;
+
+});
+
+function searchMY (k) {
+ var year ;
+for (prop in k) {	if (prop =="born") year = k[prop]};
+return year;
+
+};
+
+var l=[];
+var i = 0;
+ancestry.forEach ( function (person) {  
+	var obj = {};
+	obj.name = person.name;
+	obj.year_p = person.born;
+	obj.mother = person.mother;
+	var k = byName[person.mother];
+	obj.year_m = searchMY(k);
+	l[i] = obj;
+	i++;
+} 
+	);
+
+//l.forEach (function (p) {console.log (p);})
+
+var differences = [];
+
+
+diff = l.map (function (p) {
+if (p.year_m) return p.year_p- p.year_m;
+})
+
+//console.log(differences);
+
+
+differences = diff.filter(function (a){
+	return a!== undefined;
+})
+console.log(average(differences)); 
+
+
+ </script>
+
+   <script src="test.js"></script>
+
+ 
+</body>
+</html>
