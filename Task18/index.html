@@ -24,7 +24,10 @@ function reliableMultiply(a, b) {
 		try {
 			var res = primitiveMultiply (a,b); 
 			break;} 
-		catch  (e) {console.log ("Try again");}
+		catch  (e) { 
+			if (e instanceof MultiplicatorUnitFailure)	
+				{console.log ("Try again")}
+		    else {throw e;}}
   
 	}
 	return res;
