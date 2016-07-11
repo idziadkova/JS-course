@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="mountains.js"></script>
+  <script src="13_dom.js"></script>
+</head>
+<body>
+
+
+<body style="min-height: 200px">
+
+<img src="cat.png" id="cat" style="position: absolute">
+<img src="hat.png" id="hat" style="position: absolute">
+
+  <script>
+
+  var cat = document.getElementById("cat");
+  var hat = document.querySelector("#hat");
+  var angle = 0, lastTime = null;
+
+
+  function animate(time) {
+    if (lastTime != null)
+      angle += (time - lastTime) * 0.001;
+    lastTime = time;
+    cat.style.top = ((Math.sin(angle) * 20)+300) + "px";
+    cat.style.left = ((Math.cos(angle) * 200)+300) + "px";
+    hat.style.top = ((Math.sin(180-angle) * 20)+260) + "px";
+    hat.style.left = ((Math.cos(180-angle) * 200)+310) + "px";
+    requestAnimationFrame(animate);
+  }
+  requestAnimationFrame(animate);
+
+  </script>
+
+</body>
+</html>
