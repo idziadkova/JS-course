@@ -1,0 +1,91 @@
+
+
+
+<canvas width="600" height="200"></canvas>
+<script>
+  var cx = document.querySelector("canvas").getContext("2d");
+
+function drawTrapezoid (startX,startY,widthH,widthB,height){
+	cx.beginPath();
+	cx.moveTo (startX,startY); 
+	cx.lineTo(startX+widthH,startY);
+	cx.lineTo(startX+widthH+(widthB-widthH)/2,startY+height);
+	cx.lineTo(startX-(widthB-widthH)/2,startY+height);
+	cx.lineTo(startX,startY);
+	cx.stroke();
+};
+
+
+function drawDiamand (startX,startY,side){
+ 	cx.beginPath();
+	cx.fillStyle = "red";
+	cx.rotate(0.25*Math.PI);	
+	cx.translate(startY,-startX);
+	cx.fillRect(startX,startY,side,side);
+	cx.translate(-startY,startX);
+	cx.rotate(-0.25*Math.PI);
+	cx.fillStyle = "black";
+};
+
+function drawZigzag(startX,startY,moveX,moveY,numb){
+	cx.beginPath();
+	var toX, toY;
+	var sX = startX;
+	var sY = startY;
+	cx.moveTo(startX,startY);
+	for (var y=0; y<numb; y++) {
+		if (y%2==0) {toX=sX+moveX; toY=sY+moveY}
+		else {toX=sX-moveX; toY=sY+moveY}
+		cx.lineTo(toX,toY);
+		var sX=toX;
+		var sY=toY;
+	}
+	cx.stroke();
+
+};
+
+function drawSpiral(startX, startY,num,circles,r) {
+	cx.beginPath();
+	var angle=2*circles*Math.PI/num;
+	var step = angle;
+	cx.moveTo(startX,startY);
+	 for (var i = 0; i<num; i++){
+	  	var endX = startX+(r*(angle)*Math.cos(angle));
+	  	var endY = startY+(r*(angle)*Math.sin(angle));
+	  	cx.lineTo(endX,endY);
+	  	angle+=step;
+	  };
+	cx.stroke(); 
+};
+
+function drawStar (startX, startY,numb, r) {
+	var angle = 2*Math.PI/numb;
+	var step=2*Math.PI/numb;
+	
+	cx.beginPath();
+	cx.translate(startX, startY);
+	
+	cx.moveTo(0,0);
+	cx.fillStyle = "orange";
+	var x=startX;
+	var y=startY;
+	for (var i = 0; i<=numb; i++) {
+		x = Math.cos(angle)*r;
+		y = (Math.sin(angle))*r;
+		angle+=step;
+		cx.quadraticCurveTo(0,0,x,y);
+	}
+	cx.fill();
+	cx.translate(-startX, -startY);
+};
+
+
+drawTrapezoid(30,20,40,70,40);
+drawDiamand(100,10,50);
+drawZigzag(200,10,70,6,12);
+drawSpiral(340,60,100,3,3);
+drawStar(450,50,8,50);
+
+  
+</script>
+
