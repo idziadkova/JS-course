@@ -1,0 +1,45 @@
+<!doctype html>
+
+
+<canvas width="400" height="400"></canvas>
+<script>
+ var cx = document.querySelector("canvas").getContext("2d");
+
+  var lastTime = null;
+  function frame(time) {
+    if (lastTime != null)
+      updateAnimation(Math.min(100, time - lastTime) / 1000);
+    lastTime = time;
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+  	var x=150;
+	var y=20;
+	var moveX=12;
+  	var moveY=12;
+  function updateAnimation(step) {
+
+  	cx.clearRect(0,0,400,400);
+	console.log("input"+x);
+  	cx.restore();
+  	cx.strokeStyle="orange";
+	var xRect = 400;
+	var yRect=400;
+	cx.strokeRect(0,0,xRect,yRect);
+	//draw a ball
+	var radius = 15;
+	cx.beginPath();
+	cx.arc(x, y, radius, 0, 7);
+	cx.fillStyle = "red";
+	cx.fill();
+	if ((x>=(xRect-1.5*radius))||x<=radius )
+		 { moveX=moveX*(-1);}
+	if ((y>=(yRect-1.5*radius))||y<=radius) 
+		 { moveY=-1*moveY;}
+	x+=moveX;y+=moveY; 
+	
+
+ 
+  }
+</script>
+
