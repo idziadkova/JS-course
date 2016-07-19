@@ -13,7 +13,7 @@ function all(promises) {
 	  			arr[num]=value;
 	  			len--;
 	  			if (len==0) {succeed(arr)};
-	  		},function (e) {fail(e.message);});	
+	  		},function (e) {fail(e);});	
   });
 })};
 
