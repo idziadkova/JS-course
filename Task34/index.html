@@ -2,20 +2,20 @@
 
 <script>
 function all(promises) {
-	
-var arr = [];
-  var res = Promise.resolve(null);
-  promises.forEach(function (elem) {
-    res = res.then(function () {
-      return elem;
-    }).then(function (value) {
-      arr.push(value);
-    });
+
+	return new Promise(function(succeed, fail) {
+		var arr=[];
+		var len = promises.length;
+	  
+	  	if (len==0) {succeed(arr)};
+	  	promises.forEach(function(elem,num) {
+	  		elem.then (function (value) {
+	  			arr[num]=value;
+	  			len--;
+	  			if (len==0) {succeed(arr)};
+	  		},function (e) {fail(e.message);});	
   });
-
-  return res.then(function () { return arr; });
-
-}
+})};
 
 // Test code.
 all([]).then(function(array) {
@@ -34,6 +34,7 @@ function fail() {
   return new Promise(function(success, fail) {
     fail(new Error("boom"));
   });
+
 }
 all([soon(1), fail(), soon(3)]).then(function(array) {
   console.log("We should not get here");
