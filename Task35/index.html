@@ -1,0 +1,29 @@
+<!doctype html>
+
+<textarea id="code">return "hi";</textarea>
+<button id="button">Run</button>
+<button id="buttonClear">Clear results</button>
+<pre id="output"></pre>
+
+
+<script>
+	var text = document.getElementById("code");
+	var output = document.getElementById("output");
+	var button = document.getElementById("button");
+	button.addEventListener("click", function (event) {
+		try {
+			var code =text.value;
+			var newF = new Function (code);
+			result=newF() + '\n';
+			outputText = document.createTextNode(result);	
+			output.appendChild(outputText);
+}
+	catch(e) {alert("An error has occured: "+e.message);}
+	});
+	var clear = document.getElementById("buttonClear");
+	clear.addEventListener("click", function () {
+		console.clear();
+		output.textContent="";
+	})
+
+</script>
