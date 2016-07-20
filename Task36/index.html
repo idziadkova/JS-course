@@ -1,0 +1,40 @@
+<!doctype html>
+
+
+<input type="text" id="field" autofocus>
+<div id="suggestions" style="cursor: pointer; width: 70px;"></div>
+
+<script>
+  // Builds up an array with global variable names, like
+  // 'alert', 'document', and 'scrollTo'
+  var terms = [];
+  for (var name in window)
+    terms.push(name);
+
+
+  	var text = document.querySelector("input");
+  	var word="";
+ 	//var count = 0;
+ 	div = document.getElementById("suggestions");
+  	text.addEventListener("keyup", function(event) {
+  		div.textContent="";
+  		var resArr=[];
+  		word = text.value;
+  		terms.forEach(function(elem) {
+  			if (elem.indexOf(word)==0) {
+  				subdiv = document.createElement("div");
+  				subdiv.setAttribute("id","subdiv");
+  				sug = document.createTextNode(elem+'\n');
+  				subdiv.appendChild(sug);
+  				div.appendChild(subdiv);
+  				/*console.log(subdiv);*/}
+
+  		})
+ 	})
+ 	
+ 	div.addEventListener("click", function (event) {
+ 		var t=event.target;
+ 		text.value =t.innerText;
+ 	})
+	
+</script>
