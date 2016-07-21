@@ -25,8 +25,9 @@
   				subdiv = document.createElement("div");
   				subdiv.setAttribute("id","subdiv");
   				sug = document.createTextNode(elem+'\n');
+  				if (word.length!=0)  {
   				subdiv.appendChild(sug);
-  				div.appendChild(subdiv);
+  				div.appendChild(subdiv);}
   				/*console.log(subdiv);*/}
 
   		})
@@ -35,6 +36,7 @@
  	div.addEventListener("click", function (event) {
  		var t=event.target;
  		text.value =t.innerText;
+ 		div.textContent="";
  	})
 	
 </script>
