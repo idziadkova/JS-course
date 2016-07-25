@@ -102,14 +102,28 @@ function calc(arrIn) {
 	var a=[];
 	arrIn.forEach(function(elem, num) { 
 		var count = 0;
+
+		if ((num%10)==0  ) {
+			if (arrIn[num-9]) count++;
+			if (arrIn[num+1]) count++;
+			if (arrIn[num+11])  count++;
+		}
+		else if ( (num%10)==9) { 
+			if (arrIn[num-1]) count++;
+			if (arrIn[num-11])  count++;
+			if (arrIn[num+9]) count++;	
+		}
+		else {
 		if (arrIn[num-1]) count++;
 		if (arrIn[num-11])  count++;
-		if (arrIn[num-10]) count++;
 		if (arrIn[num-9]) count++;
 		if (arrIn[num+1]) count++;
 		if (arrIn[num+11])  count++;
-		if (arrIn[num+10]) count++;
-		if (arrIn[num+9]) count++;				
+		if (arrIn[num+9]) count++;	
+	};
+if (arrIn[num+10]) count++;
+if (arrIn[num-10]) count++;
+
 	if (count==3) {a[num]=true}
 	else 	{if ((elem) && (count==2))  {a[num]=true}
 			else a[num]=false};
