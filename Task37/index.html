@@ -8,41 +8,35 @@
 
 <script>
 
+var size=10;
+
 //create initial array
 var chArr = [];
-for (var i=0; i<10; i++) {
-	for (var j=0; j<10; j++) {
-		if (i!=0 ) {
-		chArr[i.toString()+j.toString()]=false;}
-		else chArr[j.toString()]=false;
-	}}
-//var chArrNew=chArr;
-//draw checkboxes
-
-
-var div = document.querySelector("div");
-//var div = document.createElement("div");
-function drawGrid(arrayInput) {
-	//console.clear();
-	var div = document.querySelector("div");
+for (var i=0; i<size; i++) {
+	for (var j=0; j<size; j++) {
+		
+		chArr[(i)*size+j]=false;
 	
+	}}
+
+
+//draw checkboxes
+var div = document.querySelector("div");
+function drawGrid(arrayInput) {
+	var div = document.querySelector("div");
 	while (div.hasChildNodes()) {
 		div.removeChild(div.firstChild);
 	}
 	document.body.removeChild(div);
 	var div = document.createElement("div");
-for (var i=0; i<10; i++) {
-	for (var j=0; j<10; j++) {
+for (var i=0; i<size; i++) {
+	for (var j=0; j<size; j++) {
 		var ch = document.createElement("INPUT");
 		ch.setAttribute("type", "checkbox");
 		var id;
-		if (i!=0) {
-		id=i.toString()+j.toString();}
-		else id = j.toString();
-		//console.log(id);
+		id = i*size+j;
 		ch.setAttribute("id", id);
 		if (arrayInput[id]==true) {ch.setAttribute("checked",true);}
-		
 		div.appendChild(ch);
 		document.body.appendChild (div);}
 	var br =document.createElement("BR");
@@ -57,79 +51,62 @@ return chArr;
 drawGrid(chArr);
 
 
-
-
 // event Next generation
   var next = document.getElementById("next");
   next.addEventListener("click", function (){
-  	
-  	  	drawGrid(calc(chArr));
-  		
+  	  	drawGrid(calc(chArr));	
   })
 
+//event Click on checkbox  
 function clickonch() {
-//event Click on checkbox
 var ch = document.querySelectorAll("INPUT");
-for (var i=0; i<100;i++) {
+for (var i=0; i<(size*size);i++) {
  	ch[i].addEventListener("click", function(event) {
-
  		(chArr[event.target.id]===true?chArr[event.target.id]=false:chArr[event.target.id]=true);
  });
-
  }
 }
-
 
 //event Click on Autorun
 var auto = document.getElementById("run");
 run.addEventListener("click", function () {
 	var autoArr=[];
-	for (var i=0; i<10; i++) {
-		for (var j=0; j<10; j++) {
+	for (var i=0; i<size; i++) {
+		for (var j=0; j<size; j++) {
 			var value;
 			((Math.random()*2<1)?value=false:value = true);
-			if (i!=0 ) {
-				autoArr[i.toString()+j.toString()]=value;}
-			else autoArr[j.toString()]=value;
-	}}
+			autoArr[i*size+j]=value;	}}
 	drawGrid(autoArr);
 })
-
-
-
 //function calculation generation
 function calc(arrIn) {
 	var a=[];
 	arrIn.forEach(function(elem, num) { 
 		var count = 0;
-
-		if ((num%10)==0  ) {
-			if (arrIn[num-9]) count++;
+		if ((num%size)==0  ) {
+			if (arrIn[num-(size-1)]) count++;
 			if (arrIn[num+1]) count++;
-			if (arrIn[num+11])  count++;
+			if (arrIn[num+(size+1)])  count++;
 		}
-		else if ( (num%10)==9) { 
+		else if ( (num%size)==(size-1)) { 
 			if (arrIn[num-1]) count++;
-			if (arrIn[num-11])  count++;
-			if (arrIn[num+9]) count++;	
+			if (arrIn[num-(size+1)])  count++;
+			if (arrIn[num+(size-1)]) count++;	
 		}
 		else {
 		if (arrIn[num-1]) count++;
-		if (arrIn[num-11])  count++;
-		if (arrIn[num-9]) count++;
+		if (arrIn[num-(size+1)])  count++;
+		if (arrIn[num-(size-1)]) count++;
 		if (arrIn[num+1]) count++;
-		if (arrIn[num+11])  count++;
-		if (arrIn[num+9]) count++;	
+		if (arrIn[num+(size+1)])  count++;
+		if (arrIn[num+(size-1)]) count++;	
 	};
-if (arrIn[num+10]) count++;
-if (arrIn[num-10]) count++;
-
+if (arrIn[num+size]) count++;
+if (arrIn[num-size]) count++;
 	if (count==3) {a[num]=true}
 	else 	{if ((elem) && (count==2))  {a[num]=true}
 			else a[num]=false};
 	})
-
 return a;
 }
-
 </script>
